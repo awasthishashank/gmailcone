@@ -25,34 +25,35 @@ export default function Message() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [mailId, setMailId] = React.useState("")
-  const [message, setMessage] = React.useState("")
+  const [mailId, setMailId] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const send = async () => {
-    const userDoc = doc(database, "Users", `${auth.currentUser?.email}`)
-    const messageRef = collection(userDoc, "Send")
+    const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
+    const messageRef = collection(userDoc, "Send");
     try {
       await addDoc(messageRef, {
         email: message
-      })
+      });
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   const inbox = async () => {
-    const userDoc = doc(database, "Users", `${mailId}`)
-    const messageRef = collection(userDoc, "Inbox")
+    const userDoc = doc(database, "Users", `${mailId}`);
+    const messageRef = collection(userDoc, "Inbox");
     try {
       await addDoc(messageRef, {
         email: message,
         sender: auth.currentUser?.displayName
-      })
-      send()
+      });
+      await send();
+      handleClose(); // Close the modal after sending the message
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   return (
     <div>

@@ -26,7 +26,7 @@ function Leftpanel(props) {
       </div>
       <div style={{marginTop:"1vw",marginLeft:"0.8vw",width:"12vw",display:"flex",alignItems:"center"}}>
         <img src={send} style={{width:"1.2vw",marginLeft:"2vw"}}/>
-        <span onClick={()=> props.setSubCollect("Send")} style={{cursor:"pointer",marginLeft:"1.6vw",fontWeight:"400",fontSize:'1.3vw'}}>Send</span>
+        <span onClick={()=> props.setSubCollect("Send")} style={{cursor:"pointer",marginLeft:"1.6vw",fontWeight:"400",fontSize:'1.3vw'}}>Sent</span>
       </div>
     </div>
   )

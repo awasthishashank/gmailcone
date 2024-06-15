@@ -7,7 +7,7 @@ import gmail from "../assets/gmail.png"
 import { Grid } from '@mui/material';
 import lens from "../assets/lens.png"
 import menu from "../assets/menu.png"
-// import Profile from './Profile';
+import Profile from './Profile';
 
 export default function Navbar(props) {
   return (
@@ -33,7 +33,7 @@ export default function Navbar(props) {
               </div>
             </Grid>
             <Grid item xs={1}>
-              {/* <Profile /> */}
+              <Profile />
             </Grid>
           </div>
         </AppBar>
