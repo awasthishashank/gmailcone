@@ -8,7 +8,7 @@ import { addDoc, collection, doc, getDocs } from 'firebase/firestore';
 import { auth, database } from '../firebase/Setup';
 
 const style = {
-  position: 'absolute',
+  position:'absolute',
   top: '50%',
   left: '92%',
   transform: 'translate(-50%, -50%)',
@@ -57,7 +57,7 @@ export default function Notes() {
 
   return (
     <div>
-      <img onClick={handleOpen} src={tasks} style={{cursor:"pointer",width:"1.4vw",paddingTop:"2vw"}}/>
+      <img onClick={handleOpen}  alt="Refresh"  src={tasks} style={{cursor:"pointer",width:"1.4vw",paddingTop:"2vw"}}/>
       <Modal
         open={open}
         onClose={handleClose}
@@ -69,7 +69,7 @@ export default function Notes() {
             Add Notes
           </Typography>
           <input onChange={(e)=>setNotes(e.target.value)} placeholder='Notes' style={{outline:"none",fontSize:"1vw",width:"11vw",height:"1.5vw"}}/>
-          <Button onClick={addNote} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw"}} >Add</Button>
+          <Button onClick={addNote} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw",marginRight:"4px"}} >Add</Button>
           <Button onClick={showNotes} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw"}} >Show</Button>
           <br/>
           {notesData.map((data)=>{

@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import pen from "../assets/pen.png"
+import pen from "../assets/pen.png";
 import { TextField } from '@mui/material';
-import { addDoc, collection, doc } from 'firebase/firestore';
-import { auth, database } from '../firebase/Setup';
+import { useModal } from '../hooks/useModal';
+import { useMessage } from '../hooks/useMessage';
 
 const style = {
   position: 'absolute',
@@ -21,38 +21,12 @@ const style = {
 };
 
 export default function Message() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { open, handleOpen, handleClose } = useModal();
+  const { mailId, setMailId, message, setMessage, inbox } = useMessage();
 
-  const [mailId, setMailId] = React.useState("");
-  const [message, setMessage] = React.useState("");
-
-  const send = async () => {
-    const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
-    const messageRef = collection(userDoc, "Send");
-    try {
-      await addDoc(messageRef, {
-        email: message
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const inbox = async () => {
-    const userDoc = doc(database, "Users", `${mailId}`);
-    const messageRef = collection(userDoc, "Inbox");
-    try {
-      await addDoc(messageRef, {
-        email: message,
-        sender: auth.currentUser?.displayName
-      });
-      await send();
-      handleClose(); // Close the modal after sending the message
-    } catch (err) {
-      console.error(err);
-    }
+  const handleSend = async () => {
+    await inbox();
+    handleClose(); // Close the modal after sending the message
   };
 
   return (
@@ -62,7 +36,7 @@ export default function Message() {
         width: "12vw", display: "flex", alignItems: "center",
         borderRadius: "20px", backgroundColor: "#BEE0FF"
       }}>
-        <img src={pen} style={{ width: "1.2vw", marginLeft: "2vw" }} />
+        <img src={pen} alt="Refresh" style={{ width: "1.2vw", marginLeft: "2vw" }} />
         <h4 style={{ marginLeft: "1.6vw", fontWeight: "400", fontSize: '1.3vw' }}>Compose</h4>
       </div>
       <Modal
@@ -84,7 +58,7 @@ export default function Message() {
           <br />
           <TextField onChange={(e) => setMessage(e.target.value)} multiline rows={12} sx={{ width: "39vw", "& fieldset": { border: "none" } }} />
           <br />
-          <Button onClick={inbox} variant='contained' sx={{
+          <Button onClick={handleSend} variant='contained' sx={{
             borderRadius: "6vw",
             fontSize: "1vw", width: "4vw", height: "3vw"
           }}>Send</Button>

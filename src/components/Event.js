@@ -59,7 +59,7 @@ export default function Event() {
 
   return (
     <div>
-      <img onClick={handleOpen} src={calendar} style={{cursor:"pointer",width:"1.4vw",paddingTop:"2vw"}}/>
+      <img onClick={handleOpen} src={calendar}  alt="Refresh" style={{cursor:"pointer",width:"1.4vw",paddingTop:"2vw"}}/>
       <Modal
         open={open}
         onClose={handleClose}
@@ -72,7 +72,7 @@ export default function Event() {
           </Typography>
           <input onChange={(e)=>setEvent(e.target.value)} placeholder='Event' style={{outline:"none",fontSize:"1vw",width:"11vw",height:"1.5vw"}}/>
           <input onChange={(e)=>setDate(e.target.value)} type='date' style={{outline:"none",fontSize:"1vw",width:"11vw",height:"1.5vw"}}/>
-          <Button onClick={addEvent} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw"}} >Add</Button>
+          <Button onClick={addEvent} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw",marginRight:"4px"}} >Add</Button>
           <Button onClick={showEvent} variant='contained' sx={{fontSize:"1vw",width:"4vw",height:"2vw",marginTop:"1vw"}} >Show</Button>
           <br/>
           {eventData.map((data)=>{
